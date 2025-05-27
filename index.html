@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raja Vardhan - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6, #0f172a);
+            color: #e2e8f0;
+            scroll-behavior: smooth;
+        }
+        .section-title {
+            font-size: 1.75rem; /* text-3xl on mobile */
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #7dd3fc;
+        }
+        @media (min-width: 640px) {
+            .section-title {
+                font-size: 2.25rem; /* text-4xl on sm+ */
+            }
+        }
+        .skill-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .skill-card:hover {
+            transform: translateY(-5px) rotate(2deg);
+            box-shadow: 0 4px 20px rgba(230, 255, 0, 0.959);
+        }
+        .gradient-section {
+            background: linear-gradient(45deg, #1e40af, #1e3a8a);
+            border-radius: 10px;
+        }
+        #home {
+            background: linear-gradient(rgba(30, 58, 138, 0.7), rgba(59, 130, 246, 0.7)), 
+            url('https://imageio.forbes.com/specials-images/imageserve/64f7a3b54a26a2ed3073b2c4.jpg?format=jpg&width=1200&q=75&crop=0%2C0%2C0%2C0') no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .profile-img {
+            border: 4px solid #3b82f6;
+            box-shadow: 0 0 20px rgba(217, 255, 0, 0.5);
+            transition: transform 0.3s ease;
+            border-radius: 50%;
+        }
+        .profile-img:hover {
+            transform: scale(1.1);
+        }
+        .header-img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #02f7ff;
+        }
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            transition: transform 0.3s ease;
+        }
+        .cert-logo-img {
+            width: 24px;
+            height: 24px;
+            transition: transform 0.3s ease;
+        }
+        .logo-img:hover, .cert-logo-img:hover {
+            transform: scale(1.2);
+        }
+        @media (min-width: 640px) {
+            .logo-img {
+                width: 48px;
+                height: 48px;
+            }
+            .header-img {
+                width: 40px;
+                height: 40px;
+            }
+        }
+        #nav-links {
+            transition: max-height 0.3s ease-in-out;
+        }
+        .mobile-nav-link {
+            display: block;
+            padding: 0.75rem 0;
+            text-align: center;
+            font-size: 1.125rem; /* text-lg */
+            color: #8bbed6; /* text-blue-300 */
+        }
+        .mobile-nav-link:hover {
+            color: #93c5fd; /* hover:text-blue-500 */
+        }
+        #menu-close-icon {
+            display: none;
+        }
+        #nav-links.open {
+            max-height: 500px; /* Adjust based on content */
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-gray-900 bg-opacity-90 z-50 py-3 sm:py-4">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <a href="#home"><img id="header-img" src="mypic.jpg" alt="Raja Vardhan Perugu" class="header-img hidden"></a>
+                <h1 id="header-text" class="text-xl sm:text-2xl font-bold text-blue-300">My Portfolio</h1>
+            </div>
+            <button id="menu-toggle" class="sm:hidden text-blue-300 focus:outline-none">
+                <svg id="menu-open-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+                <svg id="menu-close-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            <div id="nav-links" class="hidden sm:flex sm:space-x-4 max-h-0 sm:max-h-full overflow-hidden flex-col sm:flex-row sm:items-center absolute sm:static top-14 left-0 w-full sm:w-auto bg-gray-900/95 sm:bg-transparent py-4 sm:py-0 px-6 sm:px-0 space-y-3 sm:space-y-0">
+                <a href="#home" class="mobile-nav-link sm:text-base sm:text-lg sm:text-blue-300 sm:hover:text-blue-500">Home</a>
+                <a href="#summary" class="mobile-nav-link sm:text-base sm:text-lg sm:text-blue-300 sm:hover:text-blue-500">About</a>
+                <a href="#experience" class="mobile-nav-link sm:text-base sm:text-lg sm:text-blue-300 sm:hover:text-blue-500">Experience</a>
+                <a href="#projects" class="mobile-nav-link sm:text-base sm:text-lg sm:text-blue-300 sm:hover:text-blue-500">Projects</a>
+                <a href="#education" class="mobile-nav-link sm:text-base sm:text-lg sm:text-blue-300 sm:hover:text-blue-500">Education</a>
+                <a href="#certifications" class="mobile-nav-link sm:text-base sm:text-lg sm:text-blue-300 sm:hover:text-blue-500">Certificates</a>
+                <a href="#skills" class="mobile-nav-link sm:text-base sm:text-lg sm:text-blue-300 sm:hover:text-blue-500">Skills</a>
+                <a href="#contact" class="mobile-nav-link sm:text-base sm:text-lg sm:text-blue-300 sm:hover:text-blue-500">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center">
+        <div class="text-center flex flex-col items-center px-4">
+            <img id="profile-img" src="mypic.jpg" alt="Raja Vardhan Perugu" class="profile-img w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-full object-cover mb-4 sm:mb-6 animate-profile">
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 animate-title">RAJA VARDHAN PERUGU</h1>
+            <p class="text-lg sm:text-xl mb-4 sm:mb-6 animate-subtitle">Aspiring AI & ML Professional</p>
+            <a href="#summary" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 sm:py-2 sm:px-6 rounded-full transition animate-button text-sm sm:text-base">Explore My Work</a>
+        </div>
+    </section>
+
+    <!-- Summary Section -->
+    <section id="summary" class="py-12 sm:py-16 md:mt-20 md:mb-20 md:pt-6 md:pb-6 gradient-section">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title">Summary</h2>
+            <p class="text-base sm:text-lg leading-relaxed max-w-3xl mx-auto animate-text">
+                Aspiring Artificial Intelligence and Machine Learning professional with strong foundational skills in GEN AI, Python, HTML, CSS, and React JS. Completed academic projects leveraging JavaScript and PostgreSQL to build efficient AI applications. Seeking opportunities to apply technical knowledge and develop innovative AI solutions by contributing to a dynamic team environment.
+            </p>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-12 sm:py-16 md:mt-20 md:mb-20 md:pt-6 md:pb-6">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title">Experience</h2>
+            <div class="space-y-4 sm:space-y-6">
+                <div class="experience-card bg-gray-600 p-4 sm:p-6 rounded animate-card">
+                    <h3 class="text-xl sm:text-2xl font-semibold">Bachelor of Technology (B.Tech)</h3>
+                    <p class="text-blue-300 text-sm sm:text-base">Vasireddy Venkatadri Institute of Technology (VVIT) • June 2024 – Present</p>
+                    <p class="text-sm sm:text-base">Currently pursuing a B.Tech in Artificial Intelligence and Machine Learning, focusing on cutting-edge technologies and practical applications.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-12 sm:py-16 md:mt-20 md:mb-20 md:pt-6 md:pb-6 gradient-section">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title">Projects</h2>
+            <!-- Project 1: AI Assistant -->
+            <div class="flex flex-col md:flex-row bg-white/10 rounded-lg shadow-md overflow-hidden animate-card">
+                <div class="md:w-1/3 h-40 md:h-48">
+                    <img src="ai assistant.jpg" alt="AI Assistant" class="w-full h-full object-cover object-center rounded-l-lg">
+                </div>
+                <div class="md:w-2/3 p-6">
+                    <h3 class="text-xl sm:text-2xl font-bold text-blue-300 mb-2">AI Assistant</h3>
+                    <p class="text-sm sm:text-base text-blue-200 mb-2">October 2024 – January 2025</p>
+                    <ul class="list-disc pl-5 text-base leading-relaxed">
+                        <li>Engineered AI Assistant with Python using PyTorch, SpeechRecognition, PyAudio.</li>
+                        <li>Voice-controlled interaction with natural language processing.</li>
+                        <li>Delivered voice feedback upon task completion for better UX.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Spacer -->
+            <div class="my-6"></div> 
+
+            <!-- Project 2: Restaurant Finder -->
+            <div class="flex flex-col md:flex-row bg-white/10 rounded-lg shadow-md overflow-hidden animate-card">
+                <div class="md:w-1/3 h-40 md:h-48">
+                    <img src="Restaurant.jpg" alt="Restaurant Finder" class="w-full h-full object-cover object-center rounded-l-lg">
+                </div>
+                <div class="md:w-2/3 p-6">
+                    <h3 class="text-xl sm:text-2xl font-bold text-blue-300 mb-2">Restaurant Finder</h3>
+                    <p class="text-sm sm:text-base text-blue-200 mb-2">March 2025 – April 2025</p>
+                    <ul class="list-disc pl-5 text-base leading-relaxed">
+                        <li>Designed for city explorers to find top restaurants with reviews.</li>
+                        <li>Built using React, Node, Express, and PostgreSQL (PERN stack).</li>
+                        <li>Dynamic listings with user ratings and real-time updates.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-12 sm:py-16 md:mt-20 md:mb-20 md:pt-6 md:pb-6">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title">Education</h2>
+            <div class="space-y-4 sm:space-y-6">
+                <div class="education-card bg-gray-700 p-4 sm:p-6 rounded-lg animate-card">
+                    <h3 class="text-xl sm:text-2xl font-semibold">B.Tech in Artificial Intelligence and Machine Learning</h3>
+                    <p class="text-blue-300 text-sm sm:text-base"> <a href="https://www.vvitu.ac.in/" target="_blank"> Vasireddy Venkatadri Institute of Technology • 2024 - 2027 </a></p>
+                </div>
+                <div class="education-card bg-gray-700 p-4 sm:p-6 rounded-lg animate-card">
+                    <h3 class="text-xl sm:text-2xl font-semibold">Diploma in Computer Science and Engineering</h3>
+                    <p class="text-blue-300 text-sm sm:text-base"> <a href="https://gecg.ac.in/" target="_blank">Guntur Engineering College • 2021 - 2024 • 72.52% </a> </p>
+                </div>
+                <div class="education-card bg-gray-700 p-4 sm:p-6 rounded-lg animate-card">
+                    <h3 class="text-xl sm:text-2xl font-semibold">10th Standard</h3>
+                    <p class="text-blue-300 text-sm sm:text-base">Sri Santhinikethan EM School • 2020 - 2021 • 100.00%</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications" class="py-12 sm:py-16 md:mt-20 md:mb-20 md:pt-6 md:pb-6 gradient-section">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title">Certifications</h2>
+            <div class="space-y-4 sm:space-y-6">
+                <div class="certification-card bg-gray-700 p-4 sm:p-6 rounded-lg animate-card">
+                    <h3 class="text-xl sm:text-2xl font-semibold">Generative AI</h3>
+                    <p class="text-blue-300 flex items-center gap-2 text-sm sm:text-base">
+                        <a href="https://www.cloudskillsboost.google/paths" target="_blank" class="flex items-center gap-2">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/480px-Google_%22G%22_logo.svg.png" alt="Google Cloud" class="cert-logo-img">
+                            Google Cloud • 2024
+                        </a>
+                    </p>
+                    <p class="text-sm sm:text-base">Demonstrates knowledge and skills in the cutting-edge field of Generative AI.</p>
+                </div>
+                <div class="certification-card bg-gray-700 p-4 sm:p-6 rounded-lg animate-card">
+                    <h3 class="text-xl sm:text-2xl font-semibold">Python</h3>
+                    <p class="text-blue-300 flex items-center gap-2 text-sm sm:text-base">
+                        <a href="https://iiitdmkl.codetantra.com/" target="_blank" class="flex items-center gap-2">
+                            <img src="https://www.codetantra.com/images/logo.png" alt="CodeTantra" class="cert-logo-img">
+                            CodeTantra • 2024
+                        </a>
+                    </p>
+                    <p class="text-sm sm:text-base">Completed a comprehensive Python programming course.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-12 sm:py-16 md:mt-20 md:mb-20 md:pt-6 md:pb-6">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title">Skills</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
+                <div class="skill-card bg-gray-700 p-4 sm:p-6 rounded-lg text-center animate-skill">
+                    <p class="text-lg sm:text-xl font-semibold">Python</p>
+                </div>
+                <div class="skill-card bg-gray-700 p-4 sm:p-6 rounded-lg text-center animate-skill">
+                    <p class="text-lg sm:text-xl font-semibold">Artificial Intelligence</p>
+                </div>
+                <div class="skill-card bg-gray-700 p-4 sm:p-6 rounded-lg text-center animate-skill">
+                    <p class="text-lg sm:text-xl font-semibold">Web Design (HTML/CSS/JS)</p>
+                </div>
+                <div class="skill-card bg-gray-700 p-4 sm:p-6 rounded-lg text-center animate-skill">
+                    <p class="text-lg sm:text-xl font-semibold">Machine Learning</p>
+                </div>
+                <div class="skill-card bg-gray-700 p-4 sm:p-6 rounded-lg text-center animate-skill">
+                    <p class="text-lg sm:text-xl font-semibold">React JS</p>
+                </div>
+                <div class="skill-card bg-gray-700 p-4 sm:p-6 rounded-lg text-center animate-skill">
+                    <p class="text-lg sm:text-xl font-semibold">Node.js</p>
+                </div>
+                <div class="skill-card bg-gray-700 p-4 sm:p-6 rounded-lg text-center animate-skill">
+                    <p class="text-lg sm:text-xl font-semibold">MySQL</p>
+                </div>
+                <div class="skill-card bg-gray-700 p-4 sm:p-6 rounded-lg text-center animate-skill">
+                    <p class="text-lg sm:text-xl font-semibold">PostgreSQL</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-12 sm:py-16 md:mt-20 md:mb-20 md:pt-6 md:pb-6 gradient-section">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title text-center">Contact</h2>
+            <div class="bg-gray-700 p-4 sm:p-6 rounded-lg">
+                <h3 class="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 text-center">Get in Touch</h3>
+                <p class="text-base sm:text-lg text-center mb-4 sm:mb-6">Feel free to reach out for more Details</p>
+                <div class="flex items-center justify-center gap-4 sm:gap-6 md:gap-8">
+                    <a href="mailto:rajavardhan445@gmail.com" target="_blank">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/480px-Google_%22G%22_logo.svg.png" alt="Email" class="logo-img">
+                    </a>
+                    <a href="https://www.linkedin.com/in/raja-vardhan-02078b270" target="_blank">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn" class="logo-img">
+                    </a>
+                    <a href="https://github.com/Rajavardhan035" target="_blank">
+                        <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" class="logo-img">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-6 sm:py-10 bg-gray-900 text-center">
+        <p class="text-sm sm:text-base">© 2025 Raja Vardhan Perugu. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Home Section Animations
+        gsap.from(".animate-profile", {
+            opacity: 0,
+            scale: 0.5,
+            rotation: 360,
+            duration: 1.5,
+            ease: "elastic.out(1, 0.5)"
+        });
+        gsap.from(".animate-title", {
+            opacity: 0,
+            y: 50,
+            rotationX: 90,
+            duration: 1.5,
+            delay: 0.2,
+            ease: "power3.out"
+        });
+        gsap.from(".animate-subtitle", {
+            opacity: 0,
+            y: 30,
+            duration: 1.5,
+            delay: 0.4,
+            ease: "power3.out"
+        });
+        gsap.from(".animate-button", {
+            opacity: 0,
+            scale: 0.7,
+            duration: 1,
+            delay: 0.6,
+            ease: "elastic.out(1, 0.3)"
+        });
+
+        // Move Profile Image to Header on Scroll
+        gsap.to("#profile-img", {
+            scrollTrigger: {
+                trigger: "#summary",
+                start: "top top",
+                toggleActions: "play none none reverse",
+                onEnter: () => {
+                    document.querySelector("#header-img").classList.remove("hidden");
+                },
+                onLeaveBack: () => {
+                    document.querySelector("#header-img").classList.add("hidden");
+                }
+            }
+        });
+
+        // Section Animations
+        gsap.utils.toArray("section").forEach((section, i) => {
+            gsap.from(section.querySelectorAll(".animate-text, .animate-card"), {
+                scrollTrigger: {
+                    trigger: section,
+                    start: "top 85%",
+                    toggleActions: "play none none reset"
+                },
+                opacity: 0,
+                y: 30,
+                rotation: 3,
+                duration: 0.8,
+                stagger: 0.15,
+                ease: "power2.out"
+            });
+        });
+
+        // Skill Card Animations
+        gsap.utils.toArray(".animate-skill").forEach((card, i) => {
+            gsap.from(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 90%",
+                    toggleActions: "play none none reset"
+                },
+                opacity: 0,
+                scale: 0.7,
+                rotation: i % 2 === 0 ? -5 : 5,
+                duration: 0.6,
+                delay: i * 0.1,
+                ease: "back.out(1.7)"
+            });
+        });
+
+        // Contact Section Icon Animation
+        gsap.from(".logo-img", {
+            scrollTrigger: {
+                trigger: "#contact",
+                start: "top 85%",
+                toggleActions: "play none none reset"
+            },
+            opacity: 0,
+            scale: 0.7,
+            duration: 0.6,
+            stagger: 0.15,
+            ease: "back.out(1.7)"
+        });
+
+        // Smooth Scrolling for Navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                targetElement.scrollIntoView({ behavior: 'smooth' });
+                // Close mobile menu after clicking
+                if (window.innerWidth < 640) {
+                    const navLinks = document.getElementById('nav-links');
+                    const menuToggle = document.getElementById('menu-toggle');
+                    navLinks.classList.add('hidden');
+                    navLinks.classList.remove('open');
+                    navLinks.style.maxHeight = '0';
+                    document.getElementById('menu-open-icon').style.display = 'block';
+                    document.getElementById('menu-close-icon').style.display = 'none';
+                    menuToggle.classList.remove('open');
+                }
+            });
+        });
+
+        // Hamburger Menu Toggle
+        document.getElementById('menu-toggle').addEventListener('click', () => {
+            const navLinks = document.getElementById('nav-links');
+            const menuToggle = document.getElementById('menu-toggle');
+            const openIcon = document.getElementById('menu-open-icon');
+            const closeIcon = document.getElementById('menu-close-icon');
+            if (navLinks.classList.contains('hidden')) {
+                navLinks.classList.remove('hidden');
+                navLinks.classList.add('open');
+                navLinks.style.maxHeight = navLinks.scrollHeight + 'px';
+                openIcon.style.display = 'none';
+                closeIcon.style.display = 'block';
+                menuToggle.classList.add('open');
+            } else {
+                navLinks.classList.add('hidden');
+                navLinks.classList.remove('open');
+                navLinks.style.maxHeight = '0';
+                openIcon.style.display = 'block';
+                closeIcon.style.display = 'none';
+                menuToggle.classList.remove('open');
+            }
+        });
+    </script>
+</body>
+</html>
